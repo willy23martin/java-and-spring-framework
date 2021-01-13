@@ -1,2 +1,2 @@
-# java-and-spring-framework
-Java and Spring framework learning
+# Java-and-Spring-Framework
+Java and Spring Framework learning.
