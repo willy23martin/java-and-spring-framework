@@ -2,6 +2,9 @@ package openweb.wmc.java.eight.stream.api;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -10,6 +13,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class StreamAPI {
 
@@ -110,11 +114,40 @@ public class StreamAPI {
 		Stream<Integer> integerStreamOfX = Stream.of(1, 2, 3, 1020, 120, 210, 211, 102, 92, 92, 90, 91, 81, 82);
 		integerStreamOfX.sorted(Comparator.reverseOrder()).forEach((t) -> System.out.println(t));
 	}
+	
+	public static void streamAPIMapAndFlapTest() {
+		// Additional references: https://howtodoinjava.com/java8/java-stream-distinct-examples/
+		// Map: data transformation
+		System.out.println("Map methods:");
+		List<String> contacts = Arrays.asList(
+				"Contact A", "Contact B", "Contact C", "Contact D"
+		);
+		contacts.stream().map(String::toUpperCase).forEach(System.out::println);
+		System.out.println("");
+		// FlatMap: 
+		System.out.println("Flap methods:");
+		HashMap<String, List<String>> contactedServices = new HashMap<String, List<String>>();
+		List<String> servicesContactedByContactA = Arrays.asList("Service A", "Service B");
+		contactedServices.put("Contact A", servicesContactedByContactA);
+		List<String> servicesContactedByContactB = Arrays.asList("Service A", "Service B", "Service C");
+		contactedServices.put("Contact B", servicesContactedByContactB);
+		List<String> servicesContactedByContactC = Arrays.asList("Service C", "Service A");
+		contactedServices.put("Contact C", servicesContactedByContactC);
+		contactedServices.entrySet().stream()
+		.map(Map.Entry::getValue)
+		.flatMap(list -> Arrays.stream(list.toArray()))
+		.distinct()
+		.collect(Collectors.toList())
+		.forEach(System.out::println);
+		System.out.println("");
+		
+	}
 
 	public static void main(String[] args) {
 		streamAPITest();
 		streamAPISearchingMethodsTest();
 		streamAPIToCalculusAndToSortMethodsTest();
+		streamAPIMapAndFlapTest();
 	}
 
 }
