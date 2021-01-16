@@ -140,14 +140,24 @@ public class StreamAPI {
 		.collect(Collectors.toList())
 		.forEach(System.out::println);
 		System.out.println("");
-		
 	}
 
+	public static void streamAPICollectors() {
+		// Collectors:
+		System.out.println("Collectors static methods:");
+		List<String> contacts = Arrays.asList(
+				"Contact 1", "Contact 2", "Contact 3", "Contact 4"
+		);
+		System.out.println(contacts.stream().map(String::toUpperCase).collect(Collectors.counting())); 
+		System.out.println("");
+	}
+	
 	public static void main(String[] args) {
 		streamAPITest();
 		streamAPISearchingMethodsTest();
 		streamAPIToCalculusAndToSortMethodsTest();
 		streamAPIMapAndFlapTest();
+		streamAPICollectors(); 
 	}
 
 }
