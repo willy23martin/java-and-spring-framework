@@ -48,4 +48,22 @@ public class OutboundCampaignResults {
 	    return results;	    
 	}
 
+	public List<String> getWrapUpCodes() {
+		return wrapUpCodes;
+	}
+
+	public void setWrapUpCodes(List<String> wrapUpCodes) {
+		this.wrapUpCodes = wrapUpCodes;
+	}
+
+	public Hashtable<String, String> getOutboundCampaignResults() {
+		return outboundCampaignResults;
+	}
+
+	public void setOutboundCampaignResults(Hashtable<String, String> outboundCampaignResults) {
+		this.outboundCampaignResults = outboundCampaignResults;
+	}
+
+	
+	
 }

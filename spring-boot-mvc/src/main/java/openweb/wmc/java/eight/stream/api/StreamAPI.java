@@ -170,12 +170,26 @@ public class StreamAPI {
 		System.out.println("");
 	}
 	
+	public static void streamAPIFilters() {
+		// Filter: middle operation: deletes elements that do not satisfy the Predicate
+		System.out.println("Filters:");
+		OutboundCampaignResults outboundCampaignResults = new OutboundCampaignResults();
+		Hashtable<String, String> outboundCampaignMap = outboundCampaignResults.getOutboundCampaignResults();
+		outboundCampaignMap.entrySet()
+		.stream()
+		.filter(result -> result.getValue().equals("No Line"))
+		.map(result -> result.getKey())
+		.forEach(System.out::println);
+		System.out.println("");
+	}
+	
 	public static void main(String[] args) {
 		streamAPITest();
 		streamAPISearchingMethodsTest();
 		streamAPIToCalculusAndToSortMethodsTest();
 		streamAPIMapAndFlapTest();
 		streamAPICollectors(); 
+		streamAPIFilters();
 	}
 
 }
