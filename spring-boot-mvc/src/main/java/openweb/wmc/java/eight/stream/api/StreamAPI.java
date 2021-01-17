@@ -165,8 +165,12 @@ public class StreamAPI {
 		OutboundCampaignResults outboundCampaignResults = new OutboundCampaignResults();
 		List<OutboundResult> outboundResults = outboundCampaignResults.results();
 		Map<String, List<OutboundResult>> wrapUpCodesCount = 
-				outboundResults.stream().collect(Collectors.groupingBy(OutboundResult::getContact));
-		System.out.println(wrapUpCodesCount);  
+				outboundResults.stream().
+				collect(Collectors.groupingBy(OutboundResult::getWrapUpCode));
+		System.out.println(wrapUpCodesCount);
+		wrapUpCodesCount.entrySet().stream()
+		.map(entry -> entry.getKey() + " = " + entry.getValue().size())
+		.forEach(System.out::println); 
 		System.out.println("");
 	}
 	
@@ -183,6 +187,17 @@ public class StreamAPI {
 		System.out.println("");
 	}
 	
+	public static void streamAPIMethodReference() {
+		// Method reference:
+		System.out.println("Method reference:");
+		OutboundCampaignResults outboundCampaignResults = new OutboundCampaignResults();
+		List<OutboundResult> outboundResults = outboundCampaignResults.results();
+		outboundResults.stream()
+		.sorted(OutboundResult::compareTo)
+		.forEach(System.out::println); 
+		System.out.println("");
+	}
+	
 	public static void main(String[] args) {
 		streamAPITest();
 		streamAPISearchingMethodsTest();
@@ -190,6 +205,7 @@ public class StreamAPI {
 		streamAPIMapAndFlapTest();
 		streamAPICollectors(); 
 		streamAPIFilters();
+		streamAPIMethodReference();
 	}
 
 }

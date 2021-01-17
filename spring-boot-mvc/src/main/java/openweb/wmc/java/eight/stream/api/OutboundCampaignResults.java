@@ -33,6 +33,9 @@ public class OutboundCampaignResults {
 		outboundCampaignResults.put("contactE", "No Line");
 		outboundCampaignResults.put("contactF", "Busy");
 		outboundCampaignResults.put("contactG", "Busy");
+		outboundCampaignResults.put("contactH", "Answer Machine");
+		outboundCampaignResults.put("contactI", "Answer Machine");
+		outboundCampaignResults.put("contactJ", "SIT");
 	}
 
 	public List<OutboundResult> results(){
@@ -44,6 +47,7 @@ public class OutboundCampaignResults {
 			OutboundResult outboundResult = new OutboundResult();
 			outboundResult.setContact(key);
 			outboundResult.setWrapUpCode(wrapUpCode); 
+			results.add(outboundResult);
 		}
 	    return results;	    
 	}
