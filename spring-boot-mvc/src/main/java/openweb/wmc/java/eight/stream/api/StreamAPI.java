@@ -193,7 +193,7 @@ public class StreamAPI {
 		OutboundCampaignResults outboundCampaignResults = new OutboundCampaignResults();
 		List<OutboundResult> outboundResults = outboundCampaignResults.results();
 		outboundResults.stream()
-		.sorted(OutboundResult::compareTo)
+		.sorted(OutboundResult::compareTo) // Method reference
 		.forEach(System.out::println); 
 		System.out.println("");
 	}
