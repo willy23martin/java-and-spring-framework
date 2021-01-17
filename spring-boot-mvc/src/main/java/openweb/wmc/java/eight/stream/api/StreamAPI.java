@@ -3,6 +3,7 @@ package openweb.wmc.java.eight.stream.api;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -148,7 +149,24 @@ public class StreamAPI {
 		List<String> contacts = Arrays.asList(
 				"Contact 1", "Contact 2", "Contact 3", "Contact 4"
 		);
-		System.out.println(contacts.stream().map(String::toUpperCase).collect(Collectors.counting())); 
+		System.out.println(contacts.stream().map(String::toUpperCase).collect(Collectors.counting()));
+		System.out.println(contacts.stream().map(String::toLowerCase).collect(Collectors.joining()));
+		
+		// Numbers:
+		Random randomValue = new Random();
+		List<Integer> numbers = randomValue.ints(0,100).limit(25).boxed().collect(Collectors.toList());
+		// Basic collectors:
+		System.out.println("Total numbers: " + numbers.stream().collect(Collectors.counting()));
+		System.out.println("Max value: " + numbers.stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get()); // Optional object.get()
+		System.out.println("Summary statistics of numbers: " + numbers.stream().collect(Collectors.summarizingInt(number -> number.intValue())));  
+		System.out.println("Average: " + numbers.stream().collect(Collectors.averagingInt(Integer::intValue)));
+		
+		// Gouping By Collectors - like SQL GROUP BY statement
+		OutboundCampaignResults outboundCampaignResults = new OutboundCampaignResults();
+		List<OutboundResult> outboundResults = outboundCampaignResults.results();
+		Map<String, List<OutboundResult>> wrapUpCodesCount = 
+				outboundResults.stream().collect(Collectors.groupingBy(OutboundResult::getContact));
+		System.out.println(wrapUpCodesCount);  
 		System.out.println("");
 	}
 	
