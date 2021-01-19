@@ -12,12 +12,15 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JavaNIO2 {
 
@@ -171,6 +174,38 @@ public class JavaNIO2 {
 		}
 	}
 	
+	public static void javaFilesStreamAPI() {
+		// Files: file management: exists, isWritable, isExcecutable, isSameFile, deleteIfExists, copy, move, createFile, createTempFile, bufferedReader, bufferedWriter
+		// inputStream, outputStream, getRootDirectories, directoryStream, createDirectory, createTempDirectory
+		Path path = Paths.get("../../");	
+		try {
+			
+			System.out.println("Files.list");
+			Stream<Path> stream = Files.list(path);
+			stream.map(String::valueOf)
+			.filter(p -> p.startsWith("."))
+			.forEach(System.out::println);
+			System.out.println("");
+			
+			System.out.println("Files.find");
+			Stream<Path> directoryTree = Files.find(path, 5, (p,a)-> String.valueOf(path).endsWith(".txt"));
+			directoryTree.sorted().map(String::valueOf).forEach(System.out::println); 
+			System.out.println("");
+			
+			System.out.println("Files.walk");
+			Stream<Path> walkingDirectoryTree = Files.walk(path);
+			walkingDirectoryTree.sorted().forEach(System.out::println); 
+			System.out.println("");
+			
+			System.out.println("Files.lines");
+			Files.lines(path, Charset.forName("Cp1252")).map(s->s.split(";")).collect(Collectors.toList()).forEach(System.out::println); 
+			System.out.println("");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		// Output:
 		javaIOFileOutputStream();
@@ -181,7 +216,9 @@ public class JavaNIO2 {
 		javaIOFileInputStream();
 		// FIle:
 		javaIOFile();
+		// NIO2 - Files
 		javaFiles();
+		javaFilesStreamAPI();
 	}
 
 }
