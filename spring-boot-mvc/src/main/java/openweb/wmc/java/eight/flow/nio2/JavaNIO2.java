@@ -12,6 +12,11 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class JavaNIO2 {
@@ -139,6 +144,33 @@ public class JavaNIO2 {
 		}
 	}
 	
+	public static void javaFiles() {
+		// Files: file management: exists, isWritable, isExcecutable, isSameFile, deleteIfExists, copy, move, createFile, createTempFile, bufferedReader, bufferedWriter
+		// inputStream, outputStream, getRootDirectories, directoryStream, createDirectory, createTempDirectory
+		Path path = Paths.get("testFileIII.txt");	
+		if(Files.notExists(path)) {
+			System.out.println("Path does not exist.");
+			try {
+				Files.createFile(path);
+				BufferedWriter bufferedWriter = Files.newBufferedWriter(path);
+				bufferedWriter.write("New test line."); 
+				bufferedWriter.close();
+				
+				ArrayList<String> toRead = (ArrayList<String>) Files.readAllLines(path);
+				toRead.stream()
+				.forEach(System.out::println); 
+				
+				Path toCopy = Paths.get("./new/");
+				Files.copy(path, toCopy, StandardCopyOption.REPLACE_EXISTING);
+				
+				Files.deleteIfExists(Paths.get("./new/testFileIII.txt"));
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		// Output:
 		javaIOFileOutputStream();
@@ -149,6 +181,7 @@ public class JavaNIO2 {
 		javaIOFileInputStream();
 		// FIle:
 		javaIOFile();
+		javaFiles();
 	}
 
 }
