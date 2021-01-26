@@ -19,6 +19,15 @@ public class RunnableTest {
 		Thread phoneNumberClassificationSetC = new Thread(new CustomRunnable(3, contactPhoneNumbersSetC));
 		phoneNumberClassificationSetC.start();
 		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				System.out.println("Custom separated Thread 1 - excecuted"); 				
+			}
+		}).start();
+		
+		new Thread(()-> System.out.println("Custom separated Thread 2 - excecuted as a lambda expression")).start();		
 	}
 
 }
