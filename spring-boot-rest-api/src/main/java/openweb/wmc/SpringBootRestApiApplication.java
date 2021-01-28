@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import openweb.wmc.model.Contact;
+import openweb.wmc.model.ContactLombok;
 
 @SpringBootApplication
 public class SpringBootRestApiApplication {
@@ -17,7 +17,7 @@ public class SpringBootRestApiApplication {
 	@Bean
 	public CommandLineRunner lookbokTest() {
 		return args -> {
-			Contact contact = new Contact();
+			ContactLombok contact = new ContactLombok();
 			
 		};
 	}
