@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import openweb.wmc.model.entities.Contact;
+import openweb.wmc.model.entities.Contacts;
 
 @Component
 public class ContactMarketingServiceDTOConverter {
@@ -16,7 +16,7 @@ public class ContactMarketingServiceDTOConverter {
 		this.modelMapper = modelMapper;
 	}
 	
-	public ContactServicesDTO convertToDTO(Contact contact) {
+	public ContactServicesDTO convertToDTO(Contacts contact) {
 		return modelMapper.map(contact, ContactServicesDTO.class);
 	}
 	 

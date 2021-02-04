@@ -1,17 +1,30 @@
 package openweb.wmc.model.entities;
 
-public class Contact {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Contacts implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private String id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "telephone")
 	private String telephone;
 	
-	public Contact() {
+	public Contacts() {
 		
 	}
 	
-	public Contact(String id, String name, String email, String telephone) {
+	public Contacts(String id, String name, String email, String telephone) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
